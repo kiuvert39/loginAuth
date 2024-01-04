@@ -17,18 +17,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Retrofit retrofit;
-    private retrofitInterface RetrofitInterface;
-    private String Base_Url = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        retrofit = new Retrofit.Builder()
-                .baseUrl(Base_Url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RetrofitInterface = retrofit.create(retrofitInterface.class);
+        EditText password = findViewById(R.id.password);
+        EditText name = findViewById(R.id.name);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -53,18 +45,15 @@ public class MainActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view).show();
-        EditText email = findViewById(R.id.email);
+
         EditText password = findViewById(R.id.password);
-        String setEmail = email.getText().toString(); //getting the input from the client
         String setPassword = password.getText().toString();
         Button login = findViewById(R.id.login);
         login.setOnClickListener( new View.OnClickListener(){
             @Override
             public  void onClick(View view){
                 HashMap<String, String> map = new HashMap<>();
-                map.put("email", setEmail);
                 map.put("password", setPassword);
-
             }
         });
     }
